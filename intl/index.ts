@@ -31,7 +31,7 @@ export const messages = {
     minute: 'Min',
     second: 'Sec',
   },
-  jp: {
+  ja: {
     languageLabel: '日本語',
     title: '黒神話：悟空のカウントダウン',
     day: 'Day',
@@ -39,7 +39,7 @@ export const messages = {
     minute: 'Min',
     second: 'Sec',
   },
-  kr: {
+  ko: {
     languageLabel: '한국어',
     title: '검은 신화: 오공 카운트다운',
     day: 'Day',

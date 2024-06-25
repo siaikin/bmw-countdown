@@ -40,8 +40,14 @@ const languageList = ref([
   { label: 'Español', value: 'es' },
 ])
 const currentLanguage = ref(
-  languageList.value[navigator.languages[0] === 'zh-CN' ? 0 : 2]
+  languageList.value.find((lang) => lang.value === localStorage.language) ??
+    languageList.value[navigator.languages[0] === 'zh-CN' ? 0 : 2]
 )
+watch(
+  currentLanguage,
+  () => (localStorage.language = currentLanguage.value.value)
+)
+
 const localeMessages = computed(() => messages[currentLanguage.value.value])
 
 useHead({
@@ -169,11 +175,11 @@ useHead({
         <div class="w-full flex justify-center items-center lang-change">
           <img
             src="https://heishenhua.com/img/home/main/language-icon.png"
-            class="w-8 absolute cursor-pointer"
+            class="w-6 absolute cursor-pointer"
             alt="language"
           />
           <div
-            class="follow-items-view absolute top-0 lg:top-auto lg:bottom-0 pt-4 lg:pb-4 w-full text-center"
+            class="follow-items-view absolute top-0 lg:top-auto lg:bottom-0 pt-8 lg:pb-4 w-full text-center"
           >
             <template v-for="locale in languageList" :key="locale.value">
               <div
