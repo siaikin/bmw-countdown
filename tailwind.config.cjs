@@ -14,12 +14,12 @@ module.exports = {
   //   },
   // },
   plugins: [
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    iconsPlugin({
-      // Collections: https://icones.js.org/
-      collections: getIconCollections(['mdi']),
-    }),
+    // require('@tailwindcss/aspect-ratio'),
+    // require('@tailwindcss/typography'),
+    // require('@tailwindcss/forms'),
+    // iconsPlugin({
+    //   // Collections: https://icones.js.org/
+    //   collections: getIconCollections(['mdi']),
+    // }),
   ],
 }
