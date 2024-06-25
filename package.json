@@ -6,7 +6,7 @@
     "dev": "cross-env DEBUG=0 vite --host",
     "build": "run-p type-check \"build-only {@}\" --",
     "build-only": "vite build",
-    "preview": "vite build && vite preview",
+    "preview": "vite build && vite preview --host",
     "start": "pnpm dev & wait-on tcp:3000 -v",
     "test": "vitest",
     "coverage": "vitest run --coverage",

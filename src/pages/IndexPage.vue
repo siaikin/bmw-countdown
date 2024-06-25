@@ -24,10 +24,10 @@ const duration = computed(() => {
 
 const matchMediaList = window.matchMedia('(min-width: 1024px)')
 const isLargeScreen = ref(matchMediaList.matches)
-matchMediaList.addEventListener(
-  'change',
-  (event) => (isLargeScreen.value = event.matches)
-)
+matchMediaList.addEventListener('change', (event) => {
+  isLargeScreen.value = event.matches
+  console.log(event.matches)
+})
 
 const languageList = ref([
   { label: '简体中文', value: 'zh-CN' },
@@ -62,12 +62,14 @@ useHead({
   <div class="relative h-[100vh] overflow-hidden bg-black">
     <header class="fixed top-0 lg:right-[6.25vw] h-100vh select-none z-30">
       <div
-        class="absolute left-4 lg:right-0 top-[4vw] flex flex-col lg:items-end items-start"
+        class="absolute left-4 lg:right-0 top-[2vw] flex flex-col lg:items-end items-start"
       >
         <div class="lg:w-[6vw] w-[24vw] cursor-pointer"></div>
         <div class="lg:w-[2vw] w-[6vw] pt-6 pr-1">
           <img
             src="https://heishenhua.com/img/b1/img_logo_bm.png"
+            width="68"
+            height="186"
             alt="heishenhua logo"
           />
         </div>
@@ -100,17 +102,24 @@ useHead({
       <img
         v-else
         src="https://www.heishenhua.com/img/MobileWeb/img_MbWeb_bg_title.png"
+        width="1080"
+        height="1920"
         alt=""
         class="w-full object-cover max-w-[unset]"
       />
       <div
-        class="absolute text-center lg:block lg:left-auto lg:w-auto lg:top-[10vw] lg:right-[12vw] top-[12vh] left-0 w-full h-full flex flex-col items-center"
+        class="absolute text-center lg:left-auto lg:w-auto lg:top-[8vw] lg:right-[12vw] top-[12vh] left-0 w-full h-full flex flex-col items-center"
       >
+        <div class="lg:w-[40vw] lg:h-[24vw] w-[80vw] h-[48vw]">
+          <img
+            src="https://www.heishenhua.com/img/home/main/phone-home-login.png"
+            width="1154"
+            height="682"
+            alt="Big logo"
+          />
+        </div>
         <div
-          class="bg-[url(https://www.heishenhua.com/img/home/main/phone-home-login.png)] bg-no-repeat bg-contain lg:w-[40vw] lg:h-[24vw] w-[80vw] h-[48vw]"
-        ></div>
-        <div
-          class="text-[36px] md:text-[64px] flex justify-between font-bold gap-[4vw] text-nowrap"
+          class="text-[36px] md:text-[64px] lg:text-[72px] xl:text-[96px] flex justify-between font-bold gap-[4vw] text-nowrap"
         >
           <span class="mr-1">
             {{ duration.days ?? 0
@@ -138,14 +147,22 @@ useHead({
           target="_blank"
           title="Discord invite"
         >
-          <img src="/discord-logo.svg" alt="Discord logo" class="h-6" />
+          <img
+            src="/discord-logo.svg"
+            alt="Discord logo"
+            class="h-6 aspect-square"
+          />
         </a>
         <a
           href="https://tieba.baidu.com/f?kw=%E9%BB%91%E7%A5%9E%E8%AF%9D&ie=utf-8"
           target="_blank"
           title="百度贴吧 - 黑神话"
         >
-          <img src="/baidu-tieba-logo.svg" alt="百度贴吧 logo" class="h-6" />
+          <img
+            src="/baidu-tieba-logo.svg"
+            alt="百度贴吧 logo"
+            class="h-6 aspect-square"
+          />
         </a>
       </div>
       <div class="fixed right-4 w-16 top-12 lg:top-auto lg:bottom-12">
