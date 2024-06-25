@@ -8,14 +8,12 @@ import IndexPage from '@/pages/IndexPage.vue'
 //   : undefined
 // const thisYear = new Date().getFullYear()
 
-setTimeout(() => {
-  const FangZhengKaiTiJianTiFontFace = new FontFace(
-    'FangZhengKaiTiJianTi',
-    "url('/FangZhengKaiTiJianTi-1.ttf')"
-  )
-  document.fonts.add(FangZhengKaiTiJianTiFontFace)
-  FangZhengKaiTiJianTiFontFace.load()
-}, 1000)
+const FangZhengKaiTiJianTiFontFace = new FontFace(
+  'FangZhengKaiTiJianTi',
+  "url('/FangZhengKaiTiJianTi-1.ttf')"
+)
+document.fonts.add(FangZhengKaiTiJianTiFontFace)
+FangZhengKaiTiJianTiFontFace.load()
 </script>
 <template>
   <IndexPage />
