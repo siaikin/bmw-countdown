@@ -180,14 +180,14 @@ HYHuangKeBangShuWFontFace.load()
         </a>
       </div>
       <div class="fixed right-4 w-16 top-12 lg:top-auto lg:bottom-12">
-        <div class="w-full flex justify-center items-center lang-change">
+        <div class="w-full lang-change">
           <img
             src="https://heishenhua.com/img/home/main/language-icon.png"
-            class="w-6 absolute cursor-pointer"
+            class="w-6 absolute cursor-pointer left-[50%] translate-x-[-50%]"
             alt="language"
           />
           <div
-            class="follow-items-view absolute top-0 lg:top-auto lg:bottom-0 pt-8 lg:pb-4 w-full text-center"
+            class="follow-items-view absolute top-0 lg:top-auto lg:bottom-0 pt-8 lg:pb-4 w-full text-center left-[50%] translate-x-[-50%]"
           >
             <template v-for="locale in languageList" :key="locale.value">
               <div

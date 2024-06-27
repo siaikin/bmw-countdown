@@ -22,4 +22,12 @@ module.exports = {
     //   collections: getIconCollections(['mdi']),
     // }),
   ],
+  corePlugins: {
+    backdropOpacity: false,
+    backgroundOpacity: false,
+    borderOpacity: false,
+    divideOpacity: false,
+    ringOpacity: false,
+    textOpacity: false
+  }
 }
