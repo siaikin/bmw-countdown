@@ -8,12 +8,12 @@ import IndexPage from '@/pages/IndexPage.vue'
 //   : undefined
 // const thisYear = new Date().getFullYear()
 
-const FangZhengKaiTiJianTiFontFace = new FontFace(
-  'FangZhengKaiTiJianTi',
-  "url('/FangZhengKaiTiJianTi-1.ttf')"
+const HYHuangKeBangShuWFontFace = new FontFace(
+  'HYHuangKeBangShuW',
+  "url('/HYHuangKeBangShuW.woff2')"
 )
-document.fonts.add(FangZhengKaiTiJianTiFontFace)
-FangZhengKaiTiJianTiFontFace.load()
+document.fonts.add(HYHuangKeBangShuWFontFace)
+HYHuangKeBangShuWFontFace.load()
 </script>
 <template>
   <IndexPage />
@@ -21,7 +21,7 @@ FangZhengKaiTiJianTiFontFace.load()
 <style>
 body {
   font-family:
-    FangZhengKaiTiJianTi,
+    HYHuangKeBangShuW,
     STKaiti,
     Kaiti SC,
     Kaiti,
@@ -34,6 +34,6 @@ body {
     WenQuanYi Micro Hei,
     Arial,
     sans-serif;
-  background-image: url('https://heishenhua.com/img/b1/img_bg.png');
+  //background-image: url('https://heishenhua.com/img/b1/img_bg.png');
 }
 </style>

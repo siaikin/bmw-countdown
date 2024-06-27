@@ -1,0 +1,42 @@
+export const messages = {
+  en: {
+    languageLabel: 'English',
+    title: 'Black Myth: Wukong Countdown',
+    day: 'Day',
+    hour: 'Hour',
+    minute: 'Min',
+    second: 'Sec',
+  },
+  ja: {
+    languageLabel: '日本語',
+    title: '黒神話：悟空のカウントダウン',
+    day: '日',
+    hour: '時',
+    minute: '分',
+    second: '秒',
+  },
+  ko: {
+    languageLabel: '한국어',
+    title: '검은 신화: 오공 카운트다운',
+    day: '일',
+    hour: '시',
+    minute: '분',
+    second: '초',
+  },
+  'zh-CN': {
+    languageLabel: '简体中文',
+    title: '《黑神话：悟空》发售倒计时',
+    day: '日',
+    hour: '时',
+    minute: '分',
+    second: '秒',
+  },
+  'zh-TW': {
+    languageLabel: '繁體中文',
+    title: '《黑神話：悟空》發售倒數計時',
+    day: '日',
+    hour: '時',
+    minute: '分',
+    second: '秒',
+  },
+}

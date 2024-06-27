@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { intervalToDuration, weeksToDays, yearsToDays } from 'date-fns'
 import { computed } from 'vue'
-import { messages } from '../../intl'
+import { messages } from '@/intl'
 
 // August 20, 2024 02:00:00 UTC
 const HAPPY_DAY = new Date('August 20, 2024 02:00:00 UTC')
@@ -31,13 +31,10 @@ matchMediaList.addEventListener('change', (event) => {
 
 const languageList = ref([
   { label: '简体中文', value: 'zh-CN' },
-  { label: '繁體中⽂', value: 'zh-TW' },
+  { label: '繁體中文', value: 'zh-TW' },
   { label: 'English', value: 'en' },
   { label: '日本語', value: 'ja' },
   { label: '한국어', value: 'ko' },
-  { label: 'Français', value: 'fr' },
-  { label: 'Deutsch', value: 'de' },
-  { label: 'Español', value: 'es' },
 ])
 const currentLanguage = ref(
   languageList.value.find((lang) => lang.value === localStorage.language) ??
@@ -65,8 +62,12 @@ useHead({
 })
 </script>
 <template>
-  <div class="relative h-[100vh] overflow-hidden bg-black">
-    <header class="fixed top-0 lg:right-[6.25vw] h-100vh select-none z-30">
+  <!-- fix safari bug: https://www.reddit.com/r/css/comments/hz0jkf/postcss_plugin_to_fix_mobile_safari_bug_with_100vh/   -->
+  <div
+    class="relative h-[100vh] overflow-hidden bg-black"
+    style="height: -webkit-fill-available"
+  >
+    <header class="fixed top-0 lg:right-[6.25vw] select-none z-30">
       <div
         class="absolute left-4 lg:right-0 top-[2vw] flex flex-col lg:items-end items-start"
       >
@@ -125,7 +126,7 @@ useHead({
           />
         </div>
         <div
-          class="text-[36px] md:text-[64px] lg:text-[72px] xl:text-[96px] flex justify-between font-bold gap-[4vw] text-nowrap"
+          class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] gap-4 flex justify-between custom-font-bg text-nowrap"
         >
           <span class="mr-1">
             {{ duration.days ?? 0
@@ -197,7 +198,7 @@ useHead({
   </div>
 </template>
 <style>
-.font-bold {
+.custom-font-bg {
   background-image: linear-gradient(#e8cfac, #a58a66, #c1a583);
   color: transparent;
   background-clip: text;
