@@ -60,6 +60,13 @@ useHead({
     },
   ],
 })
+
+const HYHuangKeBangShuWFontFace = new FontFace(
+  'HYHuangKeBangShuW',
+  "url('/HYHuangKeBangShuW.woff2')"
+)
+document.fonts.add(HYHuangKeBangShuWFontFace)
+HYHuangKeBangShuWFontFace.load()
 </script>
 <template>
   <!-- fix safari bug: https://www.reddit.com/r/css/comments/hz0jkf/postcss_plugin_to_fix_mobile_safari_bug_with_100vh/   -->
@@ -126,7 +133,7 @@ useHead({
           />
         </div>
         <div
-          class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] gap-4 flex justify-between custom-font-bg text-nowrap"
+          class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] gap-4 flex justify-between custom-font text-nowrap"
         >
           <span class="mr-1">
             {{ duration.days ?? 0
@@ -198,12 +205,27 @@ useHead({
   </div>
 </template>
 <style>
-.custom-font-bg {
+.custom-font {
   background-image: linear-gradient(#e8cfac, #a58a66, #c1a583);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+  font-family:
+    HYHuangKeBangShuW,
+    STKaiti,
+    Kaiti SC,
+    Kaiti,
+    BlinkMacSystemFont,
+    Helvetica Neue,
+    PingFang SC,
+    Microsoft YaHei,
+    Source Han Sans SC,
+    Noto Sans CJK SC,
+    WenQuanYi Micro Hei,
+    Arial,
+    sans-serif;
 }
+
 .lang-change > .follow-items-view {
   display: none;
 }
