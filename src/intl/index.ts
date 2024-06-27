@@ -6,6 +6,8 @@ export const messages = {
     hour: 'Hour',
     minute: 'Min',
     second: 'Sec',
+    releaseSubtitle:
+      'World simultaneous release at 10:00 AM on August 20, 2024 (UTC+8)',
   },
   ja: {
     languageLabel: '日本語',
@@ -14,6 +16,7 @@ export const messages = {
     hour: '時',
     minute: '分',
     second: '秒',
+    releaseSubtitle: '2024年8月20日午前10時（UTC+8）に世界同時リリース',
   },
   ko: {
     languageLabel: '한국어',
@@ -22,6 +25,7 @@ export const messages = {
     hour: '시',
     minute: '분',
     second: '초',
+    releaseSubtitle: '2024년 8월 20일 오전 10시 (UTC+8) 전세계 동시 발매',
   },
   'zh-CN': {
     languageLabel: '简体中文',
@@ -30,6 +34,7 @@ export const messages = {
     hour: '时',
     minute: '分',
     second: '秒',
+    releaseSubtitle: '2024年8月20日上午10点（UTC+8）发售',
   },
   'zh-TW': {
     languageLabel: '繁體中文',
@@ -38,5 +43,6 @@ export const messages = {
     hour: '時',
     minute: '分',
     second: '秒',
+    releaseSubtitle: '2024年8月20日上午10點（UTC+8）發售',
   },
 }

@@ -12,6 +12,12 @@ import IndexPage from '@/pages/IndexPage.vue'
   <IndexPage />
 </template>
 <style>
+html,
+body,
+#app {
+  height: 100%;
+}
+
 body {
   background-image: url('https://heishenhua.com/img/b1/img_bg.png');
   background-repeat: repeat;

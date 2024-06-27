@@ -70,10 +70,7 @@ HYHuangKeBangShuWFontFace.load()
 </script>
 <template>
   <!-- fix safari bug: https://www.reddit.com/r/css/comments/hz0jkf/postcss_plugin_to_fix_mobile_safari_bug_with_100vh/   -->
-  <div
-    class="relative h-[100vh] overflow-hidden bg-black"
-    style="height: -webkit-fill-available"
-  >
+  <div class="relative h-full overflow-hidden bg-black">
     <header class="fixed top-0 lg:right-[6.25vw] select-none z-30">
       <div
         class="absolute left-4 lg:right-0 top-[2vw] flex flex-col lg:items-end items-start"
@@ -92,13 +89,15 @@ HYHuangKeBangShuWFontFace.load()
     <main class="lg:w-full h-full">
       <video
         v-if="isLargeScreen"
-        class="w-full object-cover max-w-[unset]"
+        class="w-full h-full object-cover"
         poster="https://www.heishenhua.com/img/MobileWeb/img_MbWeb_bg_title.png"
         loop
         preload="auto"
         muted
         playsinline
         autoplay
+        width="1920"
+        height="1080"
         webkit-playsinline
         x-webkit-airplay
         x5-video-player-type
@@ -106,21 +105,32 @@ HYHuangKeBangShuWFontFace.load()
         x5-video-player-fullscreen
         x5-video-ignore-metadata
       >
-        <source
-          src="https://heishenhua.com/video/b1/video_WebTitle_batch.mp4"
-          type="video/mp4"
-        />
+        <source src="/video_WebTitle_batch.mp4" type="video/mp4" />
         Your browser does not support playback for this video. Please update
         your browser or try a different one.
       </video>
-      <img
+      <video
         v-else
-        src="https://www.heishenhua.com/img/MobileWeb/img_MbWeb_bg_title.png"
-        width="1080"
-        height="1920"
-        alt=""
-        class="w-full object-cover max-w-[unset]"
-      />
+        class="w-full h-full object-cover"
+        poster="https://www.heishenhua.com/img/MobileWeb/img_MbWeb_bg_title.png"
+        loop
+        preload="auto"
+        muted
+        playsinline
+        autoplay
+        width="480"
+        height="640"
+        webkit-playsinline
+        x-webkit-airplay
+        x5-video-player-type
+        x5-video-orientation
+        x5-video-player-fullscreen
+        x5-video-ignore-metadata
+      >
+        <source src="/video_WebTitle_batch_Mobile.mp4" type="video/mp4" />
+        Your browser does not support playback for this video. Please update
+        your browser or try a different one.
+      </video>
       <div
         class="absolute text-center lg:left-auto lg:w-auto lg:top-[8vw] lg:right-[12vw] top-[12vh] left-0 w-full h-full flex flex-col items-center"
       >
@@ -152,6 +162,9 @@ HYHuangKeBangShuWFontFace.load()
             }}<span class="text-[0.4em]">{{ localeMessages['second'] }}</span>
           </span>
         </div>
+        <!--        <div class="text-[#a83d32]" style="font-family: STKaiti">-->
+        <!--          {{ localeMessages['releaseSubtitle'] }}-->
+        <!--        </div>-->
       </div>
     </main>
     <footer>
