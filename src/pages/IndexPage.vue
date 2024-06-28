@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { intervalToDuration, weeksToDays, yearsToDays } from 'date-fns'
-import { computed } from 'vue'
 import { messages } from '@/intl'
+import { ref, computed, watch } from 'vue'
+import { useHead } from '@unhead/vue'
 
 // August 20, 2024 02:00:00 UTC
 const HAPPY_DAY = new Date('August 20, 2024 02:00:00 UTC')
 
 const timestamp = ref(Date.now())
-setInterval(() => (timestamp.value = Date.now()), 1000)
+setInterval(() => {
+  timestamp.value = Date.now()
+}, 1000)
 const duration = computed(() => {
   const result = intervalToDuration({
     start: timestamp.value,
