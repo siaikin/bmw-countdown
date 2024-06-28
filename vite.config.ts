@@ -6,6 +6,8 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import { version as pkgVersion } from './package.json'
 import legacy from '@vitejs/plugin-legacy'
+import cdn from 'vite-plugin-cdn-import'
+import { viteExternalsPlugin } from 'vite-plugin-externals'
 
 process.env.VITE_APP_VERSION = pkgVersion
 if (process.env.NODE_ENV === 'production') {
@@ -13,6 +15,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export default defineConfig({
+  build: {
+    minify: 'terser',
+  },
   plugins: [
     vue(),
     AutoImport({
@@ -30,6 +35,21 @@ export default defineConfig({
       eslintrc: {
         enabled: true,
       },
+    }),
+    cdn({
+      modules: [
+        'vue',
+        {
+          name: 'date-fns',
+          var: 'dateFns',
+          path: 'cdn.min.js',
+        },
+      ],
+      enableInDevMode: true,
+    }),
+    viteExternalsPlugin({
+      vue: 'Vue',
+      'date-fns': 'dateFns',
     }),
     Components({
       dts: 'components.d.ts',

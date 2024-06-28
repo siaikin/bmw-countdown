@@ -26,7 +26,6 @@ const matchMediaList = window.matchMedia('(min-width: 1024px)')
 const isLargeScreen = ref(matchMediaList.matches)
 matchMediaList.addEventListener('change', (event) => {
   isLargeScreen.value = event.matches
-  console.log(event.matches)
 })
 
 const languageList = ref([
