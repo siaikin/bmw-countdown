@@ -47,4 +47,17 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      '/umami-api/': {
+        target: 'https://api.umami.is/v1',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/umami-api/, ''),
+        headers: {
+          Accept: 'application/json',
+          'x-umami-api-key': 'k5z1qwy1alCl0t3ggniPrclbbeDOnv1v',
+        },
+      },
+    },
+  },
 })

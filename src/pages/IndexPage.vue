@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { differenceInSeconds } from 'date-fns'
 import { messages } from '@/intl'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
 
 // August 20, 2024 02:00:00 UTC
@@ -70,6 +70,24 @@ const HYHuangKeBangShuWFontFace = new FontFace(
 )
 document.fonts.add(HYHuangKeBangShuWFontFace)
 HYHuangKeBangShuWFontFace.load()
+
+const stats = ref({ visitors: 0, pageViews: 0 })
+onMounted(async () => {
+  const url = new URL(
+    '/umami-api/websites/1f07fe02-2d8d-44e2-b096-6d98dcc9fd40/stats',
+    location.origin
+  )
+  url.searchParams.set('startAt', 0)
+  url.searchParams.set('endAt', Date.now().toString())
+  const resp = await fetch(url, {
+    method: 'GET',
+  })
+  const { visitors, pageviews } = await resp.json()
+  stats.value = {
+    visitors: visitors?.value ?? 0,
+    pageViews: pageviews?.value ?? 0,
+  }
+})
 </script>
 <template>
   <!-- fix safari bug: https://www.reddit.com/r/css/comments/hz0jkf/postcss_plugin_to_fix_mobile_safari_bug_with_100vh/   -->
@@ -171,29 +189,41 @@ HYHuangKeBangShuWFontFace.load()
       </div>
     </main>
     <footer>
-      <div class="fixed right-4 bottom-12 flex gap-4 lg:right-auto lg:left-4">
-        <a
-          href="https://discord.com/invite/blackmythwukong"
-          target="_blank"
-          title="Discord invite"
+      <div
+        class="fixed right-4 bottom-12 flex flex-col lg:flex-row items-end gap-0 lg:gap-4 lg:right-auto lg:left-4"
+      >
+        <div class="flex gap-4">
+          <a
+            href="https://discord.com/invite/blackmythwukong"
+            target="_blank"
+            title="Discord invite"
+          >
+            <img
+              src="/discord-logo.svg"
+              alt="Discord logo"
+              class="h-6 aspect-square"
+            />
+          </a>
+          <a
+            href="https://tieba.baidu.com/f?kw=%E9%BB%91%E7%A5%9E%E8%AF%9D&ie=utf-8"
+            target="_blank"
+            title="百度贴吧 - 黑神话"
+          >
+            <img
+              src="/baidu-tieba-logo.svg"
+              alt="百度贴吧 logo"
+              class="h-6 aspect-square"
+            />
+          </a>
+        </div>
+        <div
+          v-if="stats.visitors > 0 && stats.pageViews > 0"
+          class="stats-font text-[#b5b4b2] text-sm"
         >
-          <img
-            src="/discord-logo.svg"
-            alt="Discord logo"
-            class="h-6 aspect-square"
-          />
-        </a>
-        <a
-          href="https://tieba.baidu.com/f?kw=%E9%BB%91%E7%A5%9E%E8%AF%9D&ie=utf-8"
-          target="_blank"
-          title="百度贴吧 - 黑神话"
-        >
-          <img
-            src="/baidu-tieba-logo.svg"
-            alt="百度贴吧 logo"
-            class="h-6 aspect-square"
-          />
-        </a>
+          已有<span class="text-[#a83d32]">{{ stats.visitors }}</span
+          >位访客，<span class="text-[#a83d32]">{{ stats.pageViews }}</span
+          >次浏览
+        </div>
       </div>
       <div class="fixed right-4 w-16 top-12 lg:top-auto lg:bottom-12">
         <div class="w-full lang-change">
@@ -226,6 +256,23 @@ HYHuangKeBangShuWFontFace.load()
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+  font-family:
+    HYHuangKeBangShuW,
+    STKaiti,
+    Kaiti SC,
+    Kaiti,
+    BlinkMacSystemFont,
+    Helvetica Neue,
+    PingFang SC,
+    Microsoft YaHei,
+    Source Han Sans SC,
+    Noto Sans CJK SC,
+    WenQuanYi Micro Hei,
+    Arial,
+    sans-serif;
+}
+
+.stats-font {
   font-family:
     HYHuangKeBangShuW,
     STKaiti,
