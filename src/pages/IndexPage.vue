@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { intervalToDuration, weeksToDays, yearsToDays } from 'date-fns'
+import { differenceInSeconds } from 'date-fns'
 import { messages } from '@/intl'
 import { ref, computed, watch } from 'vue'
 import { useHead } from '@unhead/vue'
@@ -12,16 +12,17 @@ setInterval(() => {
   timestamp.value = Date.now()
 }, 1000)
 const duration = computed(() => {
-  const result = intervalToDuration({
-    start: timestamp.value,
-    end: HAPPY_DAY,
-  })
-  result.days += result.years ? yearsToDays(result.years) : 0
-  result.years = 0
-  result.days += result.months ? result.months * 30 : 0
-  result.months = 0
-  result.days += result.weeks ? weeksToDays(result.weeks) : 0
-  result.weeks = 0
+  const result = { days: 0, hours: 0, minutes: 0, seconds: 0 }
+
+  let seconds = differenceInSeconds(HAPPY_DAY, timestamp.value)
+  result.days = Math.floor(seconds / 86400)
+  seconds -= result.days * 86400
+  result.hours = Math.floor(seconds / 3600)
+  seconds -= result.hours * 3600
+  result.minutes = Math.floor(seconds / 60)
+  seconds -= result.minutes * 60
+  result.seconds = seconds
+
   return result
 })
 
