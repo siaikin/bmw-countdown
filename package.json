@@ -81,10 +81,5 @@
     "vitest": "1.6.0",
     "vue-tsc": "2.0.21",
     "wait-on": "7.2.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "eslint": "8.x"
-    }
   }
 }
