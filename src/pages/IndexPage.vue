@@ -88,6 +88,23 @@ onMounted(async () => {
     pageViews: pageviews?.value ?? 0,
   }
 })
+
+import { registerSW } from 'virtual:pwa-register'
+const hasUpdate = ref(false)
+const updateSW = registerSW({
+  onNeedRefresh() {
+    hasUpdate.value = true
+  },
+  onOfflineReady() {},
+})
+function handleRefresh() {
+  updateSW()
+}
+const beforeInstallPromptEvent = ref()
+window.addEventListener(
+  'beforeinstallprompt',
+  (event) => (beforeInstallPromptEvent.value = event)
+)
 </script>
 <template>
   <!-- fix safari bug: https://www.reddit.com/r/css/comments/hz0jkf/postcss_plugin_to_fix_mobile_safari_bug_with_100vh/   -->
@@ -190,9 +207,17 @@ onMounted(async () => {
     </main>
     <footer>
       <div
-        class="fixed right-4 bottom-12 flex flex-col lg:flex-row items-end gap-0 lg:gap-4 lg:right-auto lg:left-4"
+        class="fixed right-4 bottom-12 flex flex-col lg:flex-row items-end gap-2 lg:gap-4 lg:right-auto lg:left-4 text-[#b5b4b2] text-sm"
       >
+        <button
+          v-if="beforeInstallPromptEvent"
+          class="bg-[url('/src/assets/images/cookies-btn.png')] bg-[length:100%_100%] px-2 py-1"
+          @click="beforeInstallPromptEvent.prompt()"
+        >
+          {{ localeMessages['installToDesktop'] }}
+        </button>
         <div class="flex gap-4">
+          <span class="-mr-2">{{ localeMessages['forum'] }} </span>
           <a
             href="https://discord.com/invite/blackmythwukong"
             target="_blank"
@@ -218,12 +243,9 @@ onMounted(async () => {
         </div>
         <div
           v-if="stats.visitors > 0 && stats.pageViews > 0"
-          class="stats-font text-[#b5b4b2] text-sm"
-        >
-          已有<span class="text-[#a83d32]">{{ stats.visitors }}</span
-          >位访客，<span class="text-[#a83d32]">{{ stats.pageViews }}</span
-          >次浏览
-        </div>
+          class="stats-font lg:items-center"
+          v-html="localeMessages['statsText'](stats)"
+        ></div>
       </div>
       <div class="fixed right-4 w-16 top-12 lg:top-auto lg:bottom-12">
         <div class="w-full lang-change">
@@ -248,6 +270,41 @@ onMounted(async () => {
         <!---->
       </div>
     </footer>
+  </div>
+  <div
+    v-if="hasUpdate"
+    class="fixed bottom-4 lg:bottom-1 w-full flex flex-col items-center text-[4vw] lg:text-sm text-[#431717]"
+  >
+    <div class="relative w-[95%] lg:w-[48%]">
+      <img
+        :src="
+          isLargeScreen
+            ? '/src/assets/images/cookies-bg-pc.png'
+            : '/src/assets/images/cookies-bg.png'
+        "
+        width="1037"
+        height="326"
+        alt="cookies bg"
+      />
+      <div
+        class="absolute top-0 left-0 z-10 w-full h-full flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-4 px-4"
+      >
+        <p>{{ localeMessages['newVersionTips'] }}</p>
+        <div
+          class="relative flex flex-col justify-center items-center w-[32vw] lg:w-[8vw] h-[8vw] lg:h-[2vw] cursor-pointer"
+          @click="handleRefresh"
+        >
+          <img
+            class="absolute left-0 top-0 -z-10 opacity-40 w-full"
+            src="/src/assets/images/cookies-btn.png"
+            width="180"
+            height="45"
+            alt="button bg"
+          />
+          <div class="text-[4vw] lg:text-[1vw]">{{ localeMessages['ok'] }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <style>

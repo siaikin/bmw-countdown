@@ -19,6 +19,19 @@ body,
 }
 
 body {
+  font-family:
+    STKaiti,
+    Kaiti SC,
+    Kaiti,
+    BlinkMacSystemFont,
+    Helvetica Neue,
+    PingFang SC,
+    Microsoft YaHei,
+    Source Han Sans SC,
+    Noto Sans CJK SC,
+    WenQuanYi Micro Hei,
+    Arial,
+    sans-serif;
   background-image: url('https://heishenhua.com/img/b1/img_bg.png');
   background-repeat: repeat;
 }

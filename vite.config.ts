@@ -6,6 +6,7 @@ import { version as pkgVersion } from './package.json'
 import legacy from '@vitejs/plugin-legacy'
 import cdn from 'vite-plugin-cdn-import'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
+import { VitePWA } from 'vite-plugin-pwa'
 
 process.env.VITE_APP_VERSION = pkgVersion
 if (process.env.NODE_ENV === 'production') {
@@ -40,6 +41,16 @@ export default defineConfig({
     legacy({
       targets: ['defaults', '>0.2%'],
     }),
+    VitePWA({
+      registerType: 'prompt',
+      devOptions: {
+        enabled: true,
+      },
+      workbox: {
+        globPatterns: ['**/*'],
+      },
+    }),
+    // basicSsl(),
     // analyzer(),
   ],
   resolve: {

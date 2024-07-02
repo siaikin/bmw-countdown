@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "《黑神话：悟空》发售倒计时",
+    "short_name": "《黑神话：悟空》发售倒计时",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -15,5 +15,6 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "display": "standalone",
+    "start_url": "/"
 }
