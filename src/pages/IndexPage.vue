@@ -3,6 +3,8 @@ import { differenceInSeconds } from 'date-fns'
 import { messages } from '@/intl'
 import { ref, computed, watch, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
+import CookieBgPC from '../assets/images/cookies-bg-pc.png'
+import CookieBg from '../assets/images/cookies-bg.png'
 
 // August 20, 2024 02:00:00 UTC
 const HAPPY_DAY = new Date('August 20, 2024 02:00:00 UTC')
@@ -277,11 +279,7 @@ window.addEventListener(
   >
     <div class="relative w-[95%] lg:w-[48%]">
       <img
-        :src="
-          isLargeScreen
-            ? '/src/assets/images/cookies-bg-pc.png'
-            : '/src/assets/images/cookies-bg.png'
-        "
+        :src="isLargeScreen ? CookieBgPC : CookieBg"
         width="1037"
         height="326"
         alt="cookies bg"
