@@ -9,7 +9,6 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting',
     'plugin:security/recommended-legacy',
-    './.eslintrc-auto-import.json',
   ],
   overrides: [
     {
@@ -25,7 +24,6 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'comma-dangle': ['error', 'only-multiline'],
-    'id-length': [2, { exceptions: ['i', 'j', '_'] }],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }],
   },
   globals: {
