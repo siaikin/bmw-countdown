@@ -14,42 +14,43 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export default defineConfig({
+  base: './',
   build: {
     minify: 'terser',
   },
   plugins: [
     vue(),
-    cdn({
-      modules: [
-        'vue',
-        {
-          name: 'date-fns',
-          var: 'dateFns',
-          path: 'cdn.min.js',
-        },
-      ],
-      enableInDevMode: true,
-      prodUrl: '//unpkg.com/{name}@{version}/{path}',
-    }),
-    viteExternalsPlugin({
-      vue: 'Vue',
-      'date-fns': 'dateFns',
-    }),
+    // cdn({
+    //   modules: [
+    //     'vue',
+    //     {
+    //       name: 'date-fns',
+    //       var: 'dateFns',
+    //       path: 'cdn.min.js',
+    //     },
+    //   ],
+    //   enableInDevMode: true,
+    //   prodUrl: '//unpkg.com/{name}@{version}/{path}',
+    // }),
+    // viteExternalsPlugin({
+    //   vue: 'Vue',
+    //   'date-fns': 'dateFns',
+    // }),
     Components({
       dts: 'components.d.ts',
     }),
     legacy({
       targets: ['defaults', '>0.2%'],
     }),
-    VitePWA({
-      registerType: 'prompt',
-      devOptions: {
-        enabled: true,
-      },
-      workbox: {
-        globPatterns: ['**/*'],
-      },
-    }),
+    // VitePWA({
+    //   registerType: 'prompt',
+    //   devOptions: {
+    //     enabled: true,
+    //   },
+    //   workbox: {
+    //     globPatterns: ['**/*'],
+    //   },
+    // }),
     // analyzer(),
   ],
   resolve: {
