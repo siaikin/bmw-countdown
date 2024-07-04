@@ -5,6 +5,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
 import CookieBgPC from '../assets/images/cookies-bg-pc.png'
 import CookieBg from '../assets/images/cookies-bg.png'
+import { genImage } from './gen-image'
 
 // August 20, 2024 02:00:00 UTC
 const HAPPY_DAY = new Date('August 20, 2024 02:00:00 UTC')
@@ -107,6 +108,66 @@ window.addEventListener(
   'beforeinstallprompt',
   (event) => (beforeInstallPromptEvent.value = event)
 )
+
+const sharedImageLoading = ref(true)
+const sharedImage = ref()
+onMounted(async () => {
+  sharedImage.value = await genImage([
+    duration.value.days,
+    localeMessages.value['day'],
+    duration.value.hours,
+    localeMessages.value['hour'],
+    duration.value.minutes,
+    localeMessages.value['minute'],
+    duration.value.seconds,
+    localeMessages.value['second'],
+  ])
+  sharedImageLoading.value = false
+})
+
+const generatedImageCopied = ref(false)
+async function generateAndCopyImage() {
+  const image = sharedImage.value
+  try {
+    const data = [new ClipboardItem({ [image.type]: image })]
+    await navigator.clipboard.write(data)
+    generatedImageCopied.value = true
+  } catch (e) {
+    console.error(e)
+
+    // download image
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(image)
+    a.download = `${localeMessages.value['title']}.png`
+    a.click()
+
+    // revoke object URL
+    URL.revokeObjectURL(a.href)
+  }
+}
+
+const shareSupported =
+  navigator.share !== undefined && navigator.canShare !== undefined
+async function handleShare() {
+  const image = sharedImage.value
+  try {
+    const shareData = {
+      title: localeMessages.value['title'],
+      url: location.origin,
+      text: `${localeMessages.value['title']} - ${duration.value.days}${localeMessages.value['day']} ${duration.value.hours}${localeMessages.value['hour']} ${duration.value.minutes}${localeMessages.value['minute']} ${duration.value.seconds}${localeMessages.value['second']}`,
+      files: [
+        new File([image], `${localeMessages.value['title']}.png`, {
+          type: 'image/png',
+        }),
+      ],
+    }
+    if (navigator.canShare(shareData)) {
+      await navigator.share(shareData)
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
 </script>
 <template>
   <!-- fix safari bug: https://www.reddit.com/r/css/comments/hz0jkf/postcss_plugin_to_fix_mobile_safari_bug_with_100vh/   -->
@@ -209,39 +270,67 @@ window.addEventListener(
     </main>
     <footer>
       <div
-        class="fixed right-4 bottom-12 flex flex-col lg:flex-row items-end gap-2 lg:gap-4 lg:right-auto lg:left-4 text-[#b5b4b2] text-sm"
+        class="fixed right-4 bottom-12 flex flex-col lg:flex-row items-end gap-2 lg:gap-4 lg:right-auto lg:left-4 text-[#b5b4b2] text-base"
       >
-        <button
-          v-if="beforeInstallPromptEvent"
-          class="bg-[url('/src/assets/images/cookies-btn.png')] bg-[length:100%_100%] px-2 py-1"
-          @click="beforeInstallPromptEvent.prompt()"
-        >
-          {{ localeMessages['installToDesktop'] }}
-        </button>
-        <div class="flex gap-4">
-          <span class="-mr-2">{{ localeMessages['forum'] }} </span>
-          <a
-            href="https://discord.com/invite/blackmythwukong"
-            target="_blank"
-            title="Discord invite"
-          >
-            <img
-              src="/discord-logo.svg"
-              alt="Discord logo"
-              class="h-6 aspect-square"
-            />
-          </a>
-          <a
-            href="https://tieba.baidu.com/f?kw=%E9%BB%91%E7%A5%9E%E8%AF%9D&ie=utf-8"
-            target="_blank"
-            title="百度贴吧 - 黑神话"
-          >
-            <img
-              src="/baidu-tieba-logo.svg"
-              alt="百度贴吧 logo"
-              class="h-6 aspect-square"
-            />
-          </a>
+        <div class="flex flex-col items-end lg:items-start gap-4">
+          <div>
+            <button
+              v-if="beforeInstallPromptEvent"
+              class="bg-[url('/src/assets/images/cookies-btn.png')] bg-[length:100%_100%] px-2 py-1"
+              @click="beforeInstallPromptEvent.prompt()"
+            >
+              {{ localeMessages['installToDesktop'] }}
+            </button>
+          </div>
+          <div class="flex gap-4">
+            <button
+              class="bg-[url('/src/assets/images/cookies-btn.png')] bg-[length:100%_100%] px-2 py-1 text-sm"
+              :disabled="sharedImageLoading"
+              @click="generateAndCopyImage"
+            >
+              <template v-if="generatedImageCopied">
+                {{ localeMessages['copied'] }}
+              </template>
+              <template v-else>
+                {{ localeMessages['generateShareImage'] }}
+                {{ sharedImageLoading ? localeMessages['loading'] : '' }}
+              </template>
+            </button>
+            <button
+              v-if="shareSupported"
+              class="bg-[url('/src/assets/images/cookies-btn.png')] bg-[length:100%_100%] px-2 py-1 text-sm"
+              :disabled="sharedImageLoading"
+              @click="handleShare"
+            >
+              {{ localeMessages['share'] }}
+              {{ sharedImageLoading ? localeMessages['loading'] : '' }}
+            </button>
+          </div>
+          <div class="flex gap-4">
+            <span class="-mr-2">{{ localeMessages['forum'] }} </span>
+            <a
+              href="https://discord.com/invite/blackmythwukong"
+              target="_blank"
+              title="Discord invite"
+            >
+              <img
+                src="/discord-logo.svg"
+                alt="Discord logo"
+                class="h-6 aspect-square"
+              />
+            </a>
+            <a
+              href="https://tieba.baidu.com/f?kw=%E9%BB%91%E7%A5%9E%E8%AF%9D&ie=utf-8"
+              target="_blank"
+              title="百度贴吧 - 黑神话"
+            >
+              <img
+                src="/baidu-tieba-logo.svg"
+                alt="百度贴吧 logo"
+                class="h-6 aspect-square"
+              />
+            </a>
+          </div>
         </div>
         <div
           v-if="stats.visitors > 0 && stats.pageViews > 0"

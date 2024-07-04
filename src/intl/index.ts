@@ -14,6 +14,10 @@ export const messages = {
       `Visitors <span class="text-[#a83d32]">${stats.visitors}</span>, Page Views <span class="text-[#a83d32]">${stats.pageViews}</span>`,
     installToDesktop: 'Install to Desktop',
     forum: 'Community: ',
+    generateShareImage: 'Generate Image',
+    share: 'Share',
+    loading: 'Loading...',
+    copied: 'Copied',
   },
   ja: {
     languageLabel: '日本語',
@@ -29,6 +33,10 @@ export const messages = {
       `訪問者 <span class="text-[#a83d32]">${stats.visitors}</span>人、ページビュー <span class="text-[#a83d32]">${stats.pageViews}</span>回`,
     installToDesktop: 'デスクトップにインストール',
     forum: 'コミュニティ：',
+    generateShareImage: '画像を生成',
+    share: '共有',
+    loading: 'ロード中...',
+    copied: 'コピーされました',
   },
   ko: {
     languageLabel: '한국어',
@@ -44,6 +52,10 @@ export const messages = {
       `방문자 <span class="text-[#a83d32]">${stats.visitors}</span>명, 페이지 뷰 <span class="text-[#a83d32]">${stats.pageViews}</span>회`,
     installToDesktop: '데스크톱에 설치',
     forum: '커뮤니티: ',
+    generateShareImage: '이미지 생성',
+    share: '공유',
+    loading: '로딩 중...',
+    copied: '복사됨',
   },
   'zh-CN': {
     languageLabel: '简体中文',
@@ -59,6 +71,10 @@ export const messages = {
       `已有<span class="text-[#a83d32]">${stats.visitors}</span>位访客，<span class="text-[#a83d32]">${stats.pageViews}</span>次浏览`,
     installToDesktop: '安装到桌面',
     forum: '交流社区：',
+    generateShareImage: '生成图片',
+    share: '分享',
+    loading: '加载中...',
+    copied: '已复制',
   },
   'zh-TW': {
     languageLabel: '繁體中文',
@@ -74,5 +90,9 @@ export const messages = {
       `已有<span class="text-[#a83d32]">${stats.visitors}</span>位訪客，<span class="text-[#a83d32]">${stats.pageViews}</span>次瀏覽`,
     installToDesktop: '安裝到桌面',
     forum: '交流社區：',
+    generateShareImage: '生成圖片',
+    share: '分享',
+    loading: '加載中...',
+    copied: '已複製',
   },
 }
