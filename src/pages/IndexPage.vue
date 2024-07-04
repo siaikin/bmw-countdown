@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { differenceInSeconds } from 'date-fns'
 import { messages } from '@/intl'
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useHead } from '@unhead/vue'
-import CookieBgPC from '../assets/images/cookies-bg-pc.png'
-import CookieBg from '../assets/images/cookies-bg.png'
-import { genImage } from './gen-image'
+// import CookieBgPC from '../assets/images/cookies-bg-pc.png'
+// import CookieBg from '../assets/images/cookies-bg.png'
+// import { genImage } from './gen-image'
 
 // August 20, 2024 02:00:00 UTC
 const HAPPY_DAY = new Date('August 20, 2024 02:00:00 UTC')
@@ -74,7 +74,7 @@ const HYHuangKeBangShuWFontFace = new FontFace(
 document.fonts.add(HYHuangKeBangShuWFontFace)
 HYHuangKeBangShuWFontFace.load()
 
-const stats = ref({ visitors: 0, pageViews: 0 })
+// const stats = ref({ visitors: 0, pageViews: 0 })
 // onMounted(async () => {
 //   const url = new URL(
 //     '/umami-api/websites/1f07fe02-2d8d-44e2-b096-6d98dcc9fd40/stats',
@@ -109,8 +109,8 @@ const stats = ref({ visitors: 0, pageViews: 0 })
 //   (event) => (beforeInstallPromptEvent.value = event)
 // )
 
-const sharedImageLoading = ref(true)
-const sharedImage = ref()
+// const sharedImageLoading = ref(true)
+// const sharedImage = ref()
 // onMounted(async () => {
 //   sharedImage.value = await genImage([
 //     duration.value.days,
@@ -125,49 +125,49 @@ const sharedImage = ref()
 //   sharedImageLoading.value = false
 // })
 
-const generatedImageCopied = ref(false)
-async function generateAndCopyImage() {
-  const image = sharedImage.value
-  try {
-    const data = [new ClipboardItem({ [image.type]: image })]
-    await navigator.clipboard.write(data)
-    generatedImageCopied.value = true
-  } catch (e) {
-    console.error(e)
+// const generatedImageCopied = ref(false)
+// async function generateAndCopyImage() {
+//   const image = sharedImage.value
+//   try {
+//     const data = [new ClipboardItem({ [image.type]: image })]
+//     await navigator.clipboard.write(data)
+//     generatedImageCopied.value = true
+//   } catch (e) {
+//     console.error(e)
+//
+//     // download image
+//     const a = document.createElement('a')
+//     a.href = URL.createObjectURL(image)
+//     a.download = `${localeMessages.value['title']}.png`
+//     a.click()
+//
+//     // revoke object URL
+//     URL.revokeObjectURL(a.href)
+//   }
+// }
 
-    // download image
-    const a = document.createElement('a')
-    a.href = URL.createObjectURL(image)
-    a.download = `${localeMessages.value['title']}.png`
-    a.click()
-
-    // revoke object URL
-    URL.revokeObjectURL(a.href)
-  }
-}
-
-const shareSupported =
-  navigator.share !== undefined && navigator.canShare !== undefined
-async function handleShare() {
-  const image = sharedImage.value
-  try {
-    const shareData = {
-      title: localeMessages.value['title'],
-      url: location.origin,
-      text: `${localeMessages.value['title']} - ${duration.value.days}${localeMessages.value['day']} ${duration.value.hours}${localeMessages.value['hour']} ${duration.value.minutes}${localeMessages.value['minute']} ${duration.value.seconds}${localeMessages.value['second']}`,
-      files: [
-        new File([image], `${localeMessages.value['title']}.png`, {
-          type: 'image/png',
-        }),
-      ],
-    }
-    if (navigator.canShare(shareData)) {
-      await navigator.share(shareData)
-    }
-  } catch (e) {
-    console.log(e)
-  }
-}
+// const shareSupported =
+//   navigator.share !== undefined && navigator.canShare !== undefined
+// async function handleShare() {
+//   const image = sharedImage.value
+//   try {
+//     const shareData = {
+//       title: localeMessages.value['title'],
+//       url: location.origin,
+//       text: `${localeMessages.value['title']} - ${duration.value.days}${localeMessages.value['day']} ${duration.value.hours}${localeMessages.value['hour']} ${duration.value.minutes}${localeMessages.value['minute']} ${duration.value.seconds}${localeMessages.value['second']}`,
+//       files: [
+//         new File([image], `${localeMessages.value['title']}.png`, {
+//           type: 'image/png',
+//         }),
+//       ],
+//     }
+//     if (navigator.canShare(shareData)) {
+//       await navigator.share(shareData)
+//     }
+//   } catch (e) {
+//     console.log(e)
+//   }
+// }
 </script>
 <template>
   <!-- fix safari bug: https://www.reddit.com/r/css/comments/hz0jkf/postcss_plugin_to_fix_mobile_safari_bug_with_100vh/   -->
