@@ -25,6 +25,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'comma-dangle': ['error', 'only-multiline'],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }],
+    'vue/multi-word-component-names': 'off'
   },
   globals: {
     defineProps: 'readonly',

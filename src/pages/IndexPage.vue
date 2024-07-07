@@ -61,8 +61,17 @@ useHead({
       content: () => localeMessages.value['title'],
     },
     {
-      name: 'twitter:title',
-      content: () => localeMessages.value['title'],
+      property: 'og:description',
+      content: () =>
+        `${localeMessages.value['title']} - ${duration.value.days}${localeMessages.value['day']} ${duration.value.hours}${localeMessages.value['hour']} ${duration.value.minutes}${localeMessages.value['minute']} ${duration.value.seconds}${localeMessages.value['second']}`,
+    },
+    {
+      property: 'og:locale',
+      content: currentLanguage.value.value,
+    },
+    {
+      property: 'og:site_name',
+      content: localeMessages.value['title'],
     },
   ],
 })
@@ -93,6 +102,7 @@ onMounted(async () => {
 })
 
 import { registerSW } from 'virtual:pwa-register'
+import Countdown from '@/components/Countdown.vue'
 const hasUpdate = ref(false)
 const updateSW = registerSW({
   onNeedRefresh() {
@@ -243,29 +253,16 @@ async function handleShare() {
             alt="Big logo"
           />
         </div>
-        <div
-          class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] gap-4 flex justify-between custom-font text-nowrap"
+        <span
+          v-if="differenceInSeconds(HAPPY_DAY, timestamp) <= 0"
+          class="custom-font text-[#a83d32] text-7xl mb-4"
         >
-          <span class="mr-1">
-            {{ duration.days ?? 0
-            }}<span class="text-[0.4em]">{{ localeMessages['day'] }}</span>
-          </span>
-          <span class="mr-1">
-            {{ duration.hours ?? 0
-            }}<span class="text-[0.4em]">{{ localeMessages['hour'] }}</span>
-          </span>
-          <span class="mr-1">
-            {{ duration.minutes ?? 0
-            }}<span class="text-[0.4em]">{{ localeMessages['minute'] }}</span>
-          </span>
-          <span class="mr-1">
-            {{ duration.seconds ?? 0
-            }}<span class="text-[0.4em]">{{ localeMessages['second'] }}</span>
-          </span>
-        </div>
-        <!--        <div class="text-[#a83d32]" style="font-family: STKaiti">-->
-        <!--          {{ localeMessages['releaseSubtitle'] }}-->
-        <!--        </div>-->
+          已发售
+        </span>
+        <Countdown
+          :locale-messages="localeMessages"
+          :duration="Math.abs(differenceInSeconds(HAPPY_DAY, timestamp))"
+        />
       </div>
     </main>
     <footer>

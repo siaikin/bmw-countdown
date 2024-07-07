@@ -1,6 +1,5 @@
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
-import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import { version as pkgVersion } from './package.json'
 import legacy from '@vitejs/plugin-legacy'
@@ -34,9 +33,6 @@ export default defineConfig({
     viteExternalsPlugin({
       vue: 'Vue',
       'date-fns': 'dateFns',
-    }),
-    Components({
-      dts: 'components.d.ts',
     }),
     legacy({
       targets: ['defaults', '>0.2%'],
