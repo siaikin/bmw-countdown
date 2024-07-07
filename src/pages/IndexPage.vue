@@ -334,6 +334,21 @@ async function handleShare() {
           class="stats-font lg:items-center"
           v-html="localeMessages['statsText'](stats)"
         ></div>
+        <div class="flex gap-4">
+          <a
+            class="text-nowrap underline"
+            href="https://steamcommunity.com/sharedfiles/filedetails/?id=3282248823"
+            target="_blank"
+            title="Steam Creative workshop link"
+          >
+            <span> Wallpaper Engine Available </span>
+            <img
+              src="/wallpaperengine-logo.png"
+              alt="Wallpaper Engine logo"
+              class="h-6 aspect-square inline-block"
+            />
+          </a>
+        </div>
       </div>
       <div class="fixed right-4 w-16 top-12 lg:top-auto lg:bottom-12">
         <div class="w-full lang-change">
