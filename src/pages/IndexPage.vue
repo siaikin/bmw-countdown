@@ -189,7 +189,7 @@ async function handleShare() {
         <div class="lg:w-[6vw] w-[24vw] cursor-pointer"></div>
         <div class="lg:w-[2vw] w-[6vw] pt-6 pr-1">
           <img
-            src="https://heishenhua.com/img/b1/img_logo_bm.png"
+            src="/img_logo_bm.png"
             width="68"
             height="186"
             alt="heishenhua logo"
@@ -201,7 +201,7 @@ async function handleShare() {
       <video
         v-if="isLargeScreen"
         class="w-full h-full object-cover"
-        poster="https://www.heishenhua.com/img/MobileWeb/img_MbWeb_bg_title.png"
+        poster="/shared-image/bg.png"
         loop
         preload="auto"
         muted
@@ -223,7 +223,7 @@ async function handleShare() {
       <video
         v-else
         class="w-full h-full object-cover"
-        poster="https://www.heishenhua.com/img/MobileWeb/img_MbWeb_bg_title.png"
+        poster="/shared-image/bg.png"
         loop
         preload="auto"
         muted
@@ -247,7 +247,7 @@ async function handleShare() {
       >
         <div class="lg:w-[40vw] lg:h-[24vw] w-[80vw] h-[48vw]">
           <img
-            src="https://www.heishenhua.com/img/home/main/phone-home-login.png"
+            src="/shared-image/logo.png"
             width="1154"
             height="682"
             alt="Big logo"
@@ -353,7 +353,7 @@ async function handleShare() {
       <div class="fixed right-4 w-16 top-12 lg:top-auto lg:bottom-12">
         <div class="w-full lang-change">
           <img
-            src="https://heishenhua.com/img/home/main/language-icon.png"
+            src="/language-icon.png"
             class="w-6 absolute cursor-pointer left-[50%] translate-x-[-50%]"
             alt="language"
           />
